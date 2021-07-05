@@ -2,20 +2,20 @@
 % Please edit documentation in R/psuedo_MLE_clayton.R
 \name{est_cop_par}
 \alias{est_cop_par}
-\title{TODO: short description}
+\title{Obtain the copula parameters estimates}
 \usage{
 est_cop_par(copula = "clayton", data, niter = 50)
 }
 \arguments{
-\item{copula}{string indicating the copula kind.}
+\item{copula}{string indicating the copula type.}
 
 \item{data}{input data.}
 
 \item{niter}{number of iterations to run.}
 }
 \value{
-
+return a data frame with two parameter estimates
 }
 \description{
-Longer description
+Obtain the copula parameters estimates
 }

@@ -1,12 +1,12 @@
 Package: bvic
-Title: 
+Title: Estimating Association Between Bivariate Event Times in Presence of Informative Censoring
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Dongdong",
            family = "Li",
            role = c("aut", "cre"),
            email = "dli.stats@gmail.com")
-Description: .
+Description: Contains the core functions for estimating the association parameter between two event times in presence of informative censoring through a copula approach.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
