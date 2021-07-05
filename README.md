@@ -1,6 +1,6 @@
 # BiVar_InformativeCensoring
 
-# READ ME
+# README
 
 There are a total of 4 files in this folder, which include 3 .R files and 1 example .RDS dataset.
 
