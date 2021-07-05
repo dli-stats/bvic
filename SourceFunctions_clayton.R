@@ -6,12 +6,12 @@ npest.star_12<-function (X){
   
   k <- ncol(X)
   
-  fit.SD <- survfit(Surv(X$C, X$delta_D)~1)
+  fit.SD <- survival::survfit(survival::Surv(X$C, X$delta_D)~1)
   SD.hat.fn  <- approxfun(x = fit.SD$time, y = fit.SD$surv, yleft = 1, yright = 0, method = "constant")
   SD.hat <- SD.hat.fn(X$C)
   
-  fit.S1.star <- survfit(Surv(X$U1, X$eta_1)~1)
-  fit.S2.star <- survfit(Surv(X$U2, X$eta_2)~1)
+  fit.S1.star <- survival::survfit(survival::Surv(X$U1, X$eta_1)~1)
+  fit.S2.star <- survival::survfit(survival::Surv(X$U2, X$eta_2)~1)
   S1.star.fn  <- approxfun(x = fit.S1.star$time, y = fit.S1.star$surv, yleft = 1, yright = 0,method = "constant")
   S2.star.fn  <- approxfun(x = fit.S2.star$time, y = fit.S2.star$surv, yleft = 1, yright = 0,method = "constant")
   

@@ -1,13 +1,13 @@
 ##################### pseudo-MLE estimation procedure: nested clayton ##################### 
 rm(list=ls())
-setwd("./clayton_example/")
-library(dplyr)
-library(survival)
-library(copula)
-library(plyr)
-library(muhaz)
-library(mvtnorm)
-library(cubature)
+# setwd("./clayton_example/")
+# library(dplyr)
+# library(survival)
+# library(copula)
+# library(plyr)
+# library(muhaz)
+# library(mvtnorm)
+# library(cubature)
 
 source("SourceFunctions_clayton.R")
 
@@ -29,16 +29,16 @@ mydat = readRDS("mydat.RDS")
 #Estimation Procedure
 #### outer: clatyon, inner: clayton ####
 
-est_cop_par = function(inner_tau, outer_tau, n, copula = "clayton", data, niter = 50){
-  tau = inner_tau
-  tau0 = outer_tau
-  if(copula == "clayton"){
-    theta.c = 2*tau/(1-tau) # clayton inner theta
-    theta0.c = 2*tau0/(1-tau0) # clayton outer theta
-  }
+est_cop_par = function(copula = "clayton", data, niter = 50){
+  # tau = inner_tau
+  # tau0 = outer_tau
+  # if(copula == "clayton"){
+  #   theta.c = 2*tau/(1-tau) # clayton inner theta
+  #   theta0.c = 2*tau0/(1-tau0) # clayton outer theta
+  # }
   
   mydat = data
-  
+  n = nrow(mydat)
   out = npest.star_12(mydat)
   mydat1 = out$X
   
@@ -73,15 +73,15 @@ est_cop_par = function(inner_tau, outer_tau, n, copula = "clayton", data, niter 
     c.S1.hat = g.fn(mydat1$S1.star.hat, mydat1$SD.U1.hat, procC.iter.clayton.c.theta0[iter,1])
     c.S2.hat = g.fn(mydat1$S2.star.hat, mydat1$SD.U2.hat, procC.iter.clayton.c.theta0[iter,1])
     
-    keep_ind = which(between(c.S1.hat,0.001,0.999) & between(c.S2.hat,0.001,0.999) & !is.na(c.S1.hat) & !is.na(c.S2.hat))
-    c.S1.hat.keep = c.S1.hat[keep_ind]
-    c.S2.hat.keep = c.S2.hat[keep_ind]
-    mydat1.keep = mydat1[keep_ind,]
+    # keep_ind = which(between(c.S1.hat,0.001,0.999) & between(c.S2.hat,0.001,0.999) & !is.na(c.S1.hat) & !is.na(c.S2.hat))
+    # c.S1.hat.keep = c.S1.hat[keep_ind]
+    # c.S2.hat.keep = c.S2.hat[keep_ind]
+    # mydat1.keep = mydat1[keep_ind,]
     
     out = optim(c(procC.iter.clayton.c.theta[iter,1],procC.iter.clayton.c.theta0[iter,1]), 
-                clayton.cc.stage.T1T2.D.lik, X0 = mydat1.keep,
-                S1.hat = c.S1.hat.keep, S2.hat = c.S2.hat.keep,
-                SD.hat = mydat1.keep$SD.hat
+                clayton.cc.stage.T1T2.D.lik, X0 = mydat1,
+                S1.hat = c.S1.hat, S2.hat = c.S2.hat,
+                SD.hat = mydat1$SD.hat
     )
     
     procC.iter.clayton.c.theta0[iter,1] <- out$par[2]
@@ -102,3 +102,4 @@ est_cop_par = function(inner_tau, outer_tau, n, copula = "clayton", data, niter 
            inner_theta = procC.iter.clayton.c.theta[max(which(!is.na(procC.iter.clayton.c.theta[,1]))),1])
          )
 }
+est_cop_par(copula = "clayton", data = mydat, niter = 50)
