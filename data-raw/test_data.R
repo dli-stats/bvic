@@ -1,7 +1,9 @@
+## code to prepare `test_data` dataset goes here
+
 ##################### Data generation: nested clayton ##################### 
 
 rm(list=ls())
-setwd("./clayton_example")
+# setwd("./clayton_example")
 library(dplyr)
 library(survival)
 library(copula)
@@ -60,9 +62,10 @@ SD.U2 <- pweibull(U2, shape = 2, scale = 85, lower.tail = F)
 
 theta = theta.c
 
-mydat = data.frame(U1, U2, C, T1, T2,
+test_data = data.frame(U1, U2, C, T1, T2,
                    T1star, T2star, D, Ca, delta_1, delta_2, delta_D,
                    eta_1, eta_2,
                    S1, S2, SD, S1.U1, S2.U2, SD.C, SD.U1, SD.U2)
 
-saveRDS(mydat, "mydat.RDS")
+
+usethis::use_data(test_data, overwrite = TRUE)

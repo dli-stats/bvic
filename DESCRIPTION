@@ -1,0 +1,32 @@
+Package: bvic
+Title: 
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Dongdong",
+           family = "Li",
+           role = c("aut", "cre"),
+           email = "dli.stats@gmail.com")
+Description: .
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 2.10)
+Imports:
+    stats,
+    survival
+Suggests:
+    knitr,
+    devtools,
+    roxygen2,
+    testthat (>= 3.0.0),
+    dplyr,
+    copula,
+    plyr,
+    muhaz,
+    mvtnorm,
+    cubature
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr
+Config/testthat/edition: 3
